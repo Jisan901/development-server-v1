@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{title}}| App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" type="text/css"/>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+    <section class="login-page sign-up-page">
+        <img src="{{ url_for('static', filename='go.jpg') }}" alt="logo" class="logo" />
+        <div class="flex-center login-page-inner">
+            <form method="post" action="/signup">
+                <h1>Sign up.</h1>
+                <p class="color-gray"><small>Already have an account?<a href="#">Log in</a></small></p>
+                <label for="email">Enter your fullname</label>
+                <input class="input" required type="text" name="name" id="name" placeholder="example" />
+                <label for="email">Enter your username</label>
+                <input class="input" required type="text" name="username" id="username" placeholder="example" />
+                <label for="email">Enter your email address</label>
+                <input class="input" required type="email" name="email" id="email" placeholder="example@gmail.com" />
+                <label for="password">Enter your password</label>
+                <input class="input" required minlength="8" type="password" name="password" id="password" placeholder="atleast 8 character" />
+                <div>
+                <input type="checkbox" name="remember" id="remember" /><small class="color-gray">agree with <a href="#">privacy and policy</a></small>
+                <input type="hidden" name="device" id="device"/>
+
+                </div>
+                <button type="submit">Sign up</button>
+            </form>
+            <div class="banner flex-center">
+                <span class="color-gray">Nice to see you</span>
+                <h1 class="color-primary">Welcome</h1>
+                <img src="{{ url_for('static', filename='box.jpg') }}" alt="banner" />
+            </div>
+        </div>
+    </section>
+        <script src="{{ url_for('static', filename='common.js') }}" type="text/javascript" charset="utf-8"></script>
+
+    
+    <!-- essential debugging tools -->
+    <script>!function(){var n=document.createElement("script");n.src="//cdn.jsdelivr.net/npm/eruda",document.body.appendChild(n),n.onload=function(){eruda.init()}}()</script>
+    <script type="text/javascript" charset="utf-8">
+    if (navigator) {
+        document.getElementById('device').value=navigator.userAgent
+    }else{
+        dangerAlert('use a better browser')
+    }
+
+                eval('dangerAlert("{{alertMessage}}")')
+    </script>
+    <!-- essential debugging tools -->
+</body>
+</html>

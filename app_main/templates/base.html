@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='common.css') }}" type="text/css" />
+    <title>{{title}} | App Name</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+{% block body %}
+
+{% endblock body %}
+    <footer>
+        <div class="multi-links">
+            <div class="links">
+                <p>Links</p>
+                <a href="#">link of foo</a>
+                <a href="#">link of foo</a>
+                <a href="#">link of</a>
+                <a href="#">link of fot</a>
+            </div>
+            <div class="links">
+                <p>Links</p>
+                <a href="#">link of foo</a>
+                <a href="#">link of foo</a>
+                <a href="#">link of</a>
+                <a href="#">link of fot</a>
+            </div>
+            <div class="links">
+                <p>Links</p>
+                <a href="#">link of foo</a>
+                <a href="#">link of foo</a>
+                <a href="#">link of</a>
+                <a href="#">link of fot</a>
+            </div>
+            <div class="links">
+                <p>Links</p>
+                <a href="#">link of foo</a>
+                <a href="#">link of foo</a>
+                <a href="#">link of</a>
+                <a href="#">link of fot</a>
+            </div>
+            <div class="links">
+                <p>Links</p>
+                <a href="#">link of foo</a>
+                <a href="#">link of foo</a>
+                <a href="#">link of</a>
+                <a href="#">link of fot</a>
+            </div>
+        </div>
+        <p>&copy;2023 <span class="anim-text">Jisan</span> project ,sponsored by <span class="anim-text">risosi</span>.com</p>
+    </footer>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="{{ url_for('static',filename='common.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script>!function(){var n=document.createElement("script");n.src="//cdn.jsdelivr.net/npm/eruda",document.body.appendChild(n),n.onload=function(){eruda.init()}}()</script>
+    <script type="text/javascript" charset="utf-8">
+    
+        eval('dangerAlert("{{alertMessage}}")')
+        
+    </script>
+</body>
+</html>

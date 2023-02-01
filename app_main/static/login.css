@@ -1,0 +1,162 @@
+
+@font-face {
+    font-family:Poppins;
+    src:url('Poppins.ttf');
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Poppins;
+}
+.color-gray{
+    color: gray;
+}
+.color-primary{
+    color: #1B76FF;
+}
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text-center{
+    text-align: center;
+}
+h1{
+    font-size: 2.3rem;
+}
+.login-page span{
+    font-size: 1.3rem;
+}
+a{
+    text-decoration: none;
+}
+.input,button{
+    height: 50px;
+    border: 1px solid gray;
+    border-radius: 7px;
+    color: #141a1b;
+    font-size: 1.15rem;
+    padding:0 10px;
+    outline: none;
+    transition: 0.5s;
+}
+
+.login-page{
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+}
+.login-page .logo{
+    height: 50px;
+    width: 100px;
+}
+
+.login-page .login-page-inner{
+    width: 100%;
+}
+.login-page .login-page-inner form:hover{
+        box-shadow: 0 0 5px #aaaaaa;
+}
+.alert-danger{
+    position: fixed;
+    top: 20px;
+    right: -300px;
+    opacity: 0;
+    width: 250px;
+    font-weight: bold;
+    color: #ff4332;
+    border: 2px solid #ff4332;
+    padding: 7px 10px;
+    border-radius: 7px;
+    background-color: #ffc1b2;
+    transition: 0.5s;
+}
+.alert-danger.alert-show{
+    opacity: 1;
+    right: 20px;
+}
+.alert-danger.danger-hide{
+    opacity: 0;
+    right: -300px;
+}
+.login-page .login-page-inner form{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 10px;
+    transition: 0.5s;
+}
+.login-page .login-page-inner form .input:hover{
+    box-shadow: 0 0 1px 5px #96c0ff;
+}
+.login-page .login-page-inner form button{
+    background-color: #1B76FF;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    margin-top: 20px;
+}
+.login-page .login-page-inner form .input{
+    margin: 6px 0;
+    border-color: lightgray;
+    box-shadow: 0 0 5px #aaaaaa,0 0 5px #aaaaaa;
+}
+.login-page .login-page-inner form label{
+    font-weight: bold;
+}
+.login-page .login-page-inner form .a{
+    font-size: 1.3rem;
+    color: #1B76FF;
+    border: 2px solid #1B76FF;
+    border-radius: 40px;
+    padding: 10px;
+    transition: 0.5s;
+}
+.login-page .login-page-inner form .a:hover{
+    background-color: #1B76FF;
+    color: #fff;
+    font-weight: bold;
+}
+.login-page .login-page-inner form p,
+.login-page .login-page-inner form h1{
+    margin:10px 0;
+}
+.login-page .login-page-inner form > *,.login-page .login-page-inner .banner>*{
+    margin: 2px 0 5px 0 ;
+}
+.login-page .login-page-inner .banner{
+    width: 50%;
+    flex-direction: column;
+    margin: 0 8px 0 0;
+}
+.login-page .login-page-inner .banner img{
+    height: 100%;
+    width: 80%;
+    padding-bottom: 7px;
+    border-bottom: 1px solid gray;
+    margin-top: 10px;
+}
+.sign-up-page .login-page-inner{
+            flex-direction: row-reverse;
+        }
+@media screen and (max-width:764px) {
+    .login-page{
+        padding: 10px;
+    }
+    .login-page .login-page-inner{
+        flex-direction: column-reverse;
+    }
+    .login-page .login-page-inner form,.login-page .login-page-inner .banner{
+        width: 90%;
+    }
+    .login-page .login-page-inner form{
+        margin-bottom: 20px;
+    }
+    .sign-up-page .login-page-inner{
+            flex-direction: column-reverse;
+    }
+}
