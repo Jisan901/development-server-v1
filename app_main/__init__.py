@@ -6,7 +6,7 @@ app = Flask(__name__)
 ###
 # production version control
 ###
-production = False
+production = True
 
 with open('app_main/config.json','r') as c:
     params = json.load(c)['params']
