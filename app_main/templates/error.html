@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+        font-family: Popping;
+    }
+    @font-face {
+        font-family:Popping;
+        src:url("{{ url_for('static', filename='Poppins.ttf') }}");
+    }
+        .error{
+            width: 100%;
+            min-height: 100vh;
+            max-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        .error img{
+            width: 300px;
+        }
+        h1{
+            font-size: 2rem;
+        }
+        h2{
+            font-size: 1.9rem;
+            margin: 17px 0;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="error">
+        <img src="{{ url_for('static',filename='error.jpg')}}" alt="error" />
+        <h1>{{errorMassage}}</h1>
+        <br />
+        <h2>please contact us <br/> on:0175765765</h2>
+        <a href="/">go to home</a>
+    </div>
+</body>
+</html>

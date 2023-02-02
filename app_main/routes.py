@@ -19,7 +19,10 @@ def dashboard():
         if 'admin' in session and session['admin']['isLogdin']==True:
             return render_template('dashboard.html')
         elif 'user' in session and session['user']['isLogdin']==True:
-            return render_template('userDashbord.html',title='dashboard')
+            if users.find_one({"email":session['user']['email'],"password":session["user"]["password"],"isFreeze":False})!=None:
+                return render_template('userDashbord.html',title='dashboard')
+            session.pop('user')
+            return render_template('error.html',errorMassage='account freezed')
     return redirect('/login')
 
 # ------------------------------
@@ -40,7 +43,10 @@ def create_user():
             "username":username,
             "email":email,
             "password":password,
-            "devices":[device]
+            "isFreeze":False,
+            "devices":[device],
+            "paid_courses":[],
+            "spend_for_courses":0
         }
         if users.find_one(parse_json({"username":username,"email":email}))==None:
             db.add(user,users)
@@ -57,26 +63,40 @@ def create_user():
 @app.route('/login',methods=['GET','POST'])
 def login():
     if 'loginAttempt' in session and session['loginAttempt']==8:
+        
         return render_template('login.html',title="login",alertMessage="too many attempt please try again after few hours")
+        
     if request.method=='POST':
         email = request.form['email']
         password = request.form['password']
         device = request.form['device']
         
         db_query=parse_json(users.find_one(parse_json({"email":email,"password":password})))
+        
+        
         if params['admin']['email']==email and params['admin']['password']==password:
             session['admin']=params['admin']
+            
             return redirect('/dashboard')
+            
         elif db_query!=None:
             devices = db_query['devices']
-            session['user']=db_query
-            if devices.count(device)>0:
-                devices=[device]
-                db.update({"email":email,"password":password},{'$set':{"devices":devices}},users)
-            else:
-                devices.append(device)
-                db.update({"email":email,"password":password},{'$set':{"devices":devices}},users)
-            return redirect('/dashboard')
+            
+            if len(devices)<=2:
+                if devices.count(device)>0:
+                    devices=[device]
+                    db.update({"email":email,"password":password},{'$set':{"devices":devices}},users)
+                else:
+                    devices.append(device)
+                    db.update({"email":email,"password":password},{'$set':{"devices":devices}},users)
+                    
+                session['user']=db_query
+                session['user']['isLogdin']=True
+                return redirect('/dashboard')
+                
+            db.update({"email":email,"password":password},{'$set':{"isFreeze":True}},users)
+            
+            return render_template('error.html',errorMassage="we freeze your account")   
         else:
             if 'loginAttempt' in session:
                 session['loginAttempt']+=1
