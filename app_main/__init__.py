@@ -7,7 +7,7 @@ app = Flask(__name__)
 ###
 # production version control
 ###
-production = False
+production = True
 
 
 
