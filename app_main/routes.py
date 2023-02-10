@@ -1,125 +1,136 @@
-from app_main import app
+from app_main import app,db,users,web_data,params,courses,course_req
 from flask import render_template, session, request, redirect
-from app_main.db import Mongo,parse_json
-from app_main import params
+from app_main.db import parse_json
+import datetime
+
+def getLogInfo():
+    if 'admin' in session or 'user' in session:
+        return True
+    return False
 
 
-db = Mongo(app)
-users = db.column('users')
+def updateDailyInfo():
+    date=datetime.datetime.utcnow().strftime("%d-%B-%Y")
+    data=parse_json(web_data.find_one({
+        "date":date
+    }))
+    if data==None:
+        db.add({
+            "date":date,
+            "visited":1,
+            "sellout_amount":0,
+            "sell_courses":[],
+            "account_created":[]
+        },web_data)
+    return data
 
+# ------------------------------- #
+#             route    '/'        #
+# ------------------------------- #
 
 @app.route('/')
 def index():
+    info = updateDailyInfo()
+    if info!=None:
+        db.update({"date":info['date']},{'$set':{"visited":info["visited"]+1}},web_data)
     return render_template('home.html', title = 'Home')
+
     
-
-@app.route('/dashboard')
-def dashboard():
-    if 'admin' in session or 'user' in session: 
-        if 'admin' in session and session['admin']['isLogdin']==True:
-            return render_template('dashboard.html')
-        elif 'user' in session and session['user']['isLogdin']==True:
-            if users.find_one({"email":session['user']['email'],"password":session["user"]["password"],"isFreeze":False})!=None:
-                return render_template('userDashbord.html',title='dashboard')
-            session.pop('user')
-            return render_template('error.html',errorMassage='account freezed')
-    return redirect('/login')
-
-# ------------------------------
-# form utility 
-# forms for authentication and create account
-#------------------------------
-
-@app.route('/signup',methods=['GET','POST'])
-def create_user():
-    if request.method == 'POST':
-        name=request.form['name']
-        username=request.form['username']
-        email=request.form['email']
-        password=request.form['password']
-        device=request.form['device']
-        user = {
-            "name":name,
-            "username":username,
-            "email":email,
-            "password":password,
-            "isFreeze":False,
-            "devices":[device],
-            "paid_courses":[],
-            "spend_for_courses":0
-        }
-        if users.find_one(parse_json({"username":username,"email":email}))==None:
-            db.add(user,users)
-            session['user']=user
-            session['user']['isLogdin']=True
-            return redirect('/dashboard')
-        return render_template('signup.html',alertMessage="Server error: username or email already exist.",title="signup")
-    return render_template('signup.html',title="signup")
-
-#------------------------------
-# loging page 
-#------------------------------
-
-@app.route('/login',methods=['GET','POST'])
-def login():
-    if 'loginAttempt' in session and session['loginAttempt']==8:
-        
-        return render_template('login.html',title="login",alertMessage="too many attempt please try again after few hours")
-        
-    if request.method=='POST':
-        email = request.form['email']
-        password = request.form['password']
-        device = request.form['device']
-        
-        db_query=parse_json(users.find_one(parse_json({"email":email,"password":password})))
-        
-        
-        if params['admin']['email']==email and params['admin']['password']==password:
-            session['admin']=params['admin']
-            
-            return redirect('/dashboard')
-            
-        elif db_query!=None:
-            devices = db_query['devices']
-            
-            if len(devices)<=2:
-                if devices.count(device)>0:
-                    devices=[device]
-                    db.update({"email":email,"password":password},{'$set':{"devices":devices}},users)
-                else:
-                    devices.append(device)
-                    db.update({"email":email,"password":password},{'$set':{"devices":devices}},users)
+# ------------------------------- #
+#             /courses            #
+# ------------------------------- #
+    
+@app.route('/courses')
+def Courses():
+    allCourses = parse_json(courses.find())[0:9]
+    return render_template('courses.html',allCourses=allCourses,title='Courses')
+    
+# ------------------------------- #
+#             /course             #
+# ------------------------------- #
+    
+@app.route('/course/<string:key>')
+def course(key):
+    cdt=parse_json(courses.find_one({'_UID_':key}))
+    if cdt!= None:
+        return render_template('course.html',data=cdt,title=cdt['title'])
+    return '<h1>404 course not found</h1>'
+    
+    
+    
+    
+# ------------------------------- #
+#              request            #
+# ------------------------------- #
+    
+@app.route('/course/apply/<string:key>',methods=['GET','POST'])
+def courseReq(key):
+    cdt=parse_json(courses.find_one({'_UID_':key}))
+    if cdt!= None:
+        if 'user' in session:
+            user = session['user']
+            if request.method=='POST':
+                data=dict(
+                name=request.form['name'],
+                email=request.form['email'],
+                phone = request.form['phone'],
+                tm=request.form['transection-methode'],
+                paynum=request.form['paynum'],
+                txid=request.form['trxid'],
+                courseId=key,
+                state='pending',
+                urserId=user['username']
+                )
+                if course_req.find_one({"urserId":user['username'],"courseId":key})==None:
                     
-                session['user']=db_query
-                session['user']['isLogdin']=True
-                return redirect('/dashboard')
-                
-            db.update({"email":email,"password":password},{'$set':{"isFreeze":True}},users)
+                    key=db.add(data,course_req)['common']
+                    old_req=parse_json(users.find_one({
+                        "email":user['email'],
+                        "password":user['password']
+                    }))['request']
+                    old_req.append(key)
+                    db.update({
+                        "email":user['email'],
+                        "password":user['password']
+                    },{
+                        "$set":{
+                            'request':old_req
+                        }
+                    },users)
+                    
+                    
+                return render_template('courseApply.html',data=cdt,act=key,title=cdt['title'],alertMessage='requested')
+            return render_template('courseApply.html',data=cdt,act=key,title=cdt['title'])
+        return redirect('/login')
+    return '<h1>404 course not found</h1>'
+    
+    
+    
+# ------------------------------- #
+#              watch              #
+# ------------------------------- #
+    
+@app.route('/class/watch/<string:key>')
+def courseWatch(key):
+    if 'user' in session:
+        user = parse_json(users.find_one({'username':session['user']['username']}))
+        if user['paid_courses'].count(key)>0:
+            course = parse_json(courses.find_one({'_UID_':key}))
+            videos = course['videos']
             
-            return render_template('error.html',errorMassage="we freeze your account")   
-        else:
-            if 'loginAttempt' in session:
-                session['loginAttempt']+=1
-            else:
-                session['loginAttempt']=1;
-            return render_template('login.html',title="login",alertMessage=f"incorrect email password attempt {session['loginAttempt'] if 'loginAttempt' in session else 0} of 8")
-
-    return render_template('login.html',title="login")
-
-#------------------------------
-#logout function remove all user and admin session
-#------------------------------
-
-@app.route('/clear')
-def clear():
-    session.clear()
-    return 'clear development session'
-
-
-@app.route('/logout')
-def logout():
+            return render_template('courseVideos.html',title = 'videos',videos = videos)
     if 'admin' in session:
-        session.pop('admin')
-    elif 'user' in session:
-        session.pop('user')
+        course = parse_json(courses.find_one({'_UID_':key}))
+        videos = course['videos']
+            
+        return render_template('courseVideos.html',title = 'videos',videos = videos)
+    
+    
     return redirect('/login')
+    
+    
+    
+    
+# ------------------------------- #
+#             routes              #
+# ------------------------------- #

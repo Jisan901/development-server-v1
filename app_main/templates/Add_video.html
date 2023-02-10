@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <header class="header">
+        {% include 'topNav.html' %}
+        {% include 'nav.html' %}
+    </header>
+<br />
+    <section class="add-blog">
+        
+        <h2>Add Video</h2>
+        <form class="blog-data" method="post" action="/courses/manage/add_video/{{act}}">
+            <input class="input" type="text" name="title" id="title"  placeholder="title"/>
+            <input class="input" type="text" name="link" id="link"  placeholder="link"/>
+            <input class="input" type="text" name="duration" id="duration"  placeholder="Duration"/>
+            <input class="input" type="text" name="bannerLink" id="bannerLink"  placeholder="thumbnail"/>
+
+            <button type="submit" class="danger" style="background-color:#1f6334;">Add</button>
+        </form>
+    </section>
+        <section class="team-blog">
+        <div class="heading">
+            <h1>videos</h1>
+        </div>
+        <br />
+        <div class="cards">
+            {% for video in videos %}
+            
+            <div class="card">
+                <img src="{{video.bannerLink}}" alt="image" />
+                <div class="body">
+                    <div class="text-content">
+                        <h4>{{video.title}}</h4>
+                        <span>duration: {{video.duration}}</span>
+                        <span><small>link: {{video.link}}</small></span>
+                    </div>
+                </div>
+            </div>
+            
+            {% endfor %}
+        </div>
+    </section>
+    <hr />
+
+{% endblock body %}

@@ -1,0 +1,20 @@
+        <nav class="nav nav2 flex-center">
+            <img src="{{url_for('static',filename='logo.jpg')}}" alt="logo" class="logo" />
+            <div>
+                
+            <span class="flex-center"><ion-icon name="menu-outline"></ion-icon></span>
+            <div class="links flex-center">
+                <a href="/">Home</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/courses">Courses</a>
+                <a href="/blogs">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/about">About</a>
+                {% if userLogdin %}
+                    <a href="/logout" class="button">Log out</a>
+                {% else %}
+                    <a href="/login" class="button">Log in</a>
+                {% endif %}
+            </div>
+            </div>
+        </nav>

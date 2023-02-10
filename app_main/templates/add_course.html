@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <header class="header">
+        {% include 'topNav.html' %}
+        {% include 'nav.html' %}
+    </header>
+<br />
+    <section class="add-blog">
+        
+        <h2>Add Course</h2>
+        {% if data %}
+        <form class="blog-data" method="POST" action="/courses/manage{{act}}">
+            <input class="input" type="text" name="title" id="title"  placeholder="title" value="{{data.title}}"/>
+            <input class="input" type="number" name="fee" id="fee"  placeholder="Fee" value="{{data.fee}}"/>
+            <input class="input" type="text" name="duration" id="duration"  placeholder="Duration" value="{{data.duration}}"/>
+            <input class="input" type="text" name="internduration" id="internduration"  placeholder="internship Duration " value="{{data.internduration}}"/>
+            <input class="input" type="text" name="jobfields" id="jobfields"  placeholder="Job|job|job|job" value="{{'|'.join(data.jobfields)}}"/>
+            <input class="input" type="text" name="courseContent" id="courseContent"  placeholder="courseContent|courseContent|courseContent" value="{{'|'.join(data.courseContent)}}"/>
+            <input class="input" type="text" name="softwares" id="softwares"  placeholder="softwares|softwares" value="{{'|'.join(data.softwares)}}"/>
+            <input class="input" type="text" name="courseDesc" id="courseDesc"  placeholder="course Desc" value="{{data.courseDesc}}"/>
+            <input class="input" type="text" name="tags" id="tags" placeholder="tag|tag|tag for search" value="{{'|'.join(data.tags)}}"/>
+            <input class="input" type="text" name="tag" id="tag" placeholder="tag" value="{{data.tag}}"/>
+            <input class="input" type="text" id="author" name="author" placeholder="Teacher" value="{{data.author}}"/>
+            <span>Banner</span>
+            <input class="input" type="text" name="banner" id="banner" placeholder="banner link" value="{{data.banner}}"/>
+            <span>user avatar link</span>
+            <input class="input" type="text" name="useravater" id="useravater" value="{{data.useravater}}" />
+            <button class="danger" type="submit" style="background-color:#1f6334;">Add</button>
+        </form>
+        {% else %}
+        <form class="blog-data" method="POST" action="/courses/manage/add">
+            <input class="input" type="text" name="title" id="title"  placeholder="title"/>
+            <input class="input" type="text" name="fee" id="fee"  placeholder="Fee"/>
+            <input class="input" type="text" name="duration" id="duration"  placeholder="Duration"/>
+            <input class="input" type="text" name="internduration" id="internduration"  placeholder="internship Duration"/>
+            <input class="input" type="text" name="jobfields" id="jobfields"  placeholder="Job|job|job|job"/>
+            <input class="input" type="text" name="courseContent" id="courseContent"  placeholder="courseContent|courseContent|courseContent"/>
+            <input class="input" type="text" name="softwares" id="softwares"  placeholder="softwares|softwares"/>
+            <input class="input" type="text" name="courseDesc" id="courseDesc"  placeholder="course Desc"/>
+            <input class="input" type="text" name="tags" id="tags" placeholder="tag|tag|tag for search" />
+            <input class="input" type="text" name="tag" id="tag" placeholder="tag" />
+            <input class="input" type="text" id="author" name="author" placeholder="Teacher"/>
+            <span>Banner</span>
+            <input class="input" type="text" name="banner" id="banner" placeholder="banner link" />
+            <span>user avatar link</span>
+            <input class="input" type="text" name="useravater" id="useravater" />
+            <button class="danger" type="submit" style="background-color:#1f6334;">Add</button>
+        </form>
+        {% endif %}
+    </section>
+    <hr />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2440716133758473"
+     crossorigin="anonymous"></script>
+{% endblock body %}

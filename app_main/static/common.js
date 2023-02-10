@@ -85,3 +85,20 @@ function rateus(){
                 }
             }
         })
+        
+        
+if(!document.getElementById('web_jumpers')){   
+
+let jumpers = document.querySelectorAll("a");
+jumpers.forEach(jumper => {
+        jumper.onclick = function(event) {
+            var e = event || window.event ;
+            if(e.preventDefault) {
+                e.preventDefault();
+            } else {
+                e.returnValue = true ;
+            }
+            location.replace(this.href);
+            jumper = null;
+        }
+})}

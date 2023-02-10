@@ -2,57 +2,17 @@
 
 {% block body %}
     <header class="header">
-        <nav class="nav">
-            <ul class="links-ic flex-center">
-                <li class="link flex-center">
-                    <a href="#" class="flex-center"><ion-icon name="logo-facebook" style="color:#5C9FF5;"></ion-icon></a></li><li class="link flex-center">
-                    <a href="#"><ion-icon style="color:#15AFF4;" name="logo-twitter"></ion-icon></a></li><li class="link flex-center">
-                    <a href="#"><ion-icon style="color:#E43651;" name="logo-pinterest"></ion-icon></a></li><li class="link flex-center">
-                    <a href="#"><ion-icon style="color:#FF0000;" name="logo-youtube"></ion-icon></a></li><li class="link flex-center">
-                    <a href="#"><ion-icon style="color:#0077B5;" name="logo-linkedin"></ion-icon></a></li><li class="link flex-center">
-                    <a href="#"><ion-icon style="color:#F14950;" name="logo-instagram"></ion-icon></a>
-                </li>
-            </ul>
-            <div class="flex-center">
-                
-            <span class="flex-center">More<ion-icon name="chevron-down-outline"></ion-icon></span>
-            <ul class="links links2 flex-center">
-                <li class="link flex-center">
-                    <a href="#" class="flex-center"><ion-icon name="call-outline"></ion-icon><span>+26123458697</span></a>
-                </li>
-                <li class="link">
-                    <a href="#" class="flex-center"><ion-icon name="phone-portrait-outline"></ion-icon><span>+88012345678,+8801234567893</span></a>
-                </li>
-                <li class="link">
-                    <a href="#" class="flex-center"><ion-icon name="time-outline"></ion-icon><span>9:30am/9:30pm</span></a>
-                </li>
-            </ul>
-            </div>
-        </nav>
-        <nav class="nav nav2 flex-center">
-            <img src="./logo_1.png" alt="logo" class="logo" />
-            <div>
-                
-            <span class="flex-center"><ion-icon name="menu-outline"></ion-icon></span>
-            <div class="links flex-center">
-                <a href="#" class="active">Home</a>
-                <a href="#">Courses</a>
-                <a href="#">links</a>
-                <a href="#">About</a>
-                <a href="#">links</a>
-                <a href="" class="button">sign up</a>
-            </div>
-            </div>
-        </nav>
+        {% include 'topNav.html' %}
+        {% include 'nav.html' %}
     </header>
     
     <section class="course-m">
                 <div class="banner banner-3 flex-center">
             <div class="text-content">
-            <h1><span class="color-primary">Course</span> Name</h1>
-                <p>Start, switch, or advance your career with more than 5,400 courses, Professional Certificates, and degrees from world-class universities and companies.</p>
+            <h1><span class="color-primary">{{data.title}}</span></h1>
+                <p>{{data.courseDesc}}</p>
                 <div class="buttons">
-                    <a href="#" class="button flex-center">Apply online</a>
+                    <a href="/course/apply/{{data._UID_}}" class="button flex-center">Apply online</a>
                 </div>
             </div>
             <img src="./logo1.jpg" alt="banner" />
@@ -60,8 +20,8 @@
         <div class="course-info">
 
             <div class="duration-info">
-                <span style="background-color:#00c4f5;">Course duration <br />1 year</span>
-                <span style="background-color:#dbb700;">3 month <br />Internship</span>
+                <span style="background-color:#00c4f5;">Course duration <br />{{data.duration}}</span>
+                <span style="background-color:#dbb700;">{{data.internduration}} <br />Internship</span>
             </div>
             <h2><span class="color-secondary">Course </span>content</h2>
             <div class="custom-ul">

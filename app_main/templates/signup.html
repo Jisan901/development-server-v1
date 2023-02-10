@@ -12,11 +12,11 @@
 </head>
 <body>
     <section class="login-page sign-up-page">
-        <img src="{{ url_for('static', filename='go.jpg') }}" alt="logo" class="logo" />
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="logo" class="logo" />
         <div class="flex-center login-page-inner">
             <form method="post" action="/signup">
                 <h1>Sign up.</h1>
-                <p class="color-gray"><small>Already have an account?<a href="#">Log in</a></small></p>
+                <p class="color-gray"><small>Already have an account?<a href="/login">Log in</a></small></p>
                 <label for="email">Enter your fullname</label>
                 <input class="input" required type="text" name="name" id="name" placeholder="example" />
                 <label for="email">Enter your username</label>
@@ -35,7 +35,7 @@
             <div class="banner flex-center">
                 <span class="color-gray">Nice to see you</span>
                 <h1 class="color-primary">Welcome</h1>
-                <img src="{{ url_for('static', filename='box.jpg') }}" alt="banner" />
+                <img src="{{ url_for('static', filename='login.jpg') }}" alt="banner" />
             </div>
         </div>
     </section>

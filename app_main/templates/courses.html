@@ -2,48 +2,8 @@
 
 {% block body %}
     <header class="header">
-        <nav class="nav">
-            <ul class="links-ic flex-center">
-                <li class="link flex-center">
-                    <a href="#" class="flex-center"><ion-icon name="logo-facebook" style="color:#5C9FF5;"></ion-icon></a></li><li class="link flex-center">
-                    <a href="#"><ion-icon style="color:#15AFF4;" name="logo-twitter"></ion-icon></a></li><li class="link flex-center">
-                    <a href="#"><ion-icon style="color:#E43651;" name="logo-pinterest"></ion-icon></a></li><li class="link flex-center">
-                    <a href="#"><ion-icon style="color:#FF0000;" name="logo-youtube"></ion-icon></a></li><li class="link flex-center">
-                    <a href="#"><ion-icon style="color:#0077B5;" name="logo-linkedin"></ion-icon></a></li><li class="link flex-center">
-                    <a href="#"><ion-icon style="color:#F14950;" name="logo-instagram"></ion-icon></a>
-                </li>
-            </ul>
-            <div class="flex-center">
-                
-            <span class="flex-center">More<ion-icon name="chevron-down-outline"></ion-icon></span>
-            <ul class="links links2 flex-center">
-                <li class="link flex-center">
-                    <a href="#" class="flex-center"><ion-icon name="call-outline"></ion-icon><span>+26123458697</span></a>
-                </li>
-                <li class="link">
-                    <a href="#" class="flex-center"><ion-icon name="phone-portrait-outline"></ion-icon><span>+88012345678,+8801234567893</span></a>
-                </li>
-                <li class="link">
-                    <a href="#" class="flex-center"><ion-icon name="time-outline"></ion-icon><span>9:30am/9:30pm</span></a>
-                </li>
-            </ul>
-            </div>
-        </nav>
-        <nav class="nav nav2 flex-center">
-            <img src="./logo_1.png" alt="logo" class="logo" />
-            <div>
-                
-            <span class="flex-center"><ion-icon name="menu-outline"></ion-icon></span>
-            <div class="links flex-center">
-                <a href="#">Home</a>
-                <a href="#" class="active">Courses</a>
-                <a href="#">links</a>
-                <a href="#">About</a>
-                <a href="#">links</a>
-                <a href="" class="button">sign up</a>
-            </div>
-            </div>
-        </nav>
+        {% include 'topNav.html' %}
+        {% include 'nav.html' %}
         <div class="course-heading">
         <div class="heading">
             <h1><span class="color-info">Courses</span> List.</h1>
@@ -111,95 +71,23 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur in, aspernatur labore officia, quia porro veritatis saepe. Mollitia.</p>
         </div>
         <div class="cards">
+            {% for course in allCourses %}
             <div class="card">
-                <img src="./logo1.jpg" alt="image" />
+                <img src="{{ course.banner }}" alt="image" />
                 <div class="body">
-                    <span class="tag" style="animation-duration:25s;" >course</span>
+                    <span class="tag" style="animation:none;" >{{course.tag}}</span>
                     <div class="text-content">
-                        <h4>Courses name</h4>
-                        <span>Fee: $500</span>
-                        <span><small>By: Elon musk</small></span>
-                        <span><small>course details: <a href="#">Details</a></small></span>
+                        <h4>{{course.title}}</h4>
+                        <span>Fee: ${{course.fee}}</span>
+                        <span><small><a class="color-info" href="/course/{{course._UID_}}" style="text-decoration:underline;">Apply</a></small></span>
                         <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">SpaceX</span>
+                            <img src="{{course.useravater}}" height="30" width="30" alt="icon" />
+                            <span class="date">{{course.author}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag" style="animation-duration:28s;" >course</span>
-                    <div class="text-content">
-                        <h4>Courses name</h4>
-                        <span>Fee: $500</span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/14/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag" style="animation-duration:23s;" >course</span>
-                    <div class="text-content">
-                        <h4>Courses name</h4>
-                        <span>Fee: $500</span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/14/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag" style="animation-duration:20s;" >course</span>
-                    <div class="text-content">
-                        <h4>Courses name</h4>
-                        <div class="stars rating-star" -data-rating="2"></div>
-                        <span>Fee: $500</span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/14/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag" style="animation-duration:19s;" >course</span>
-                    <div class="text-content">
-                        <h4>Courses name</h4>
-                        <div class="stars rating-star" -data-rating="2"></div>
-                        <span>Fee: $500</span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/14/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag" style="animation-duration:24s;" >course</span>
-                    <div class="text-content">
-                        <h4>Courses name</h4>
-                        <div class="stars rating-star" -data-rating="2"></div>
-                        <span>Fee: $500</span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/14/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <div class="subscription">
             <h2>You can be your own<br />guiding star with our help</h2>

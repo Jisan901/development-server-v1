@@ -10,6 +10,14 @@ import json
 def parse_json(data):
     return json.loads(json_util.dumps(data))
 
+def genRandKey(length,target):
+    key = secrets.token_urlsafe(length)
+    if target.find_one({'_UID_':key})==None:
+        return key
+    return genRandKey(length,target)
+    
+    
+
 class Mongo():
     """Mongo is a simple useable function based object"""
     
@@ -38,15 +46,15 @@ class Mongo():
                 item['_KEY_'] = 1
             else:
                 item['_KEY_'] = (target.find().skip(target.count_documents({})-1)[0]['_KEY_'])+1
-            item['__DATE__'] = datetime.datetime.utcnow().strftime("%d %B, %Y, %H:%M:%S")
+            item['__DATE__'] = datetime.datetime.utcnow().strftime("%d-%B-%Y, %H:%M:%S")
+            item['_UID_']=genRandKey(10,target)
             idn = target.insert_one(parse_json(item)).inserted_id
-            return {'common':idn,'bson':ObjectId(idn)}
+            return {'common':item['_KEY_'],'bson':ObjectId(idn)}
         elif type(item)==type(list()):
             ids = []
             idsb = []
             for it in item:
-                it[unique] = target.create_index(unique)
-                it['__DATE__'] = datetime.datetime.utcnow().strftime("%d %B, %Y, %H:%M:%S")
+                it['__DATE__'] = datetime.datetime.utcnow().strftime("%d-%B-%Y, %H:%M:%S")
                 ins=target.insert_one(parse_json(it)).inserted_id
                 ids.append(ins)
                 idsb.append(ObjectId(ins))
