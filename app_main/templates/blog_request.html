@@ -14,30 +14,30 @@
     <body>
         <nav class="nav-2 flex-center w-full">
             <div class="links flex-center links-4">
-                <a href="/request/courses/pending">pending</a>
-                <a href="/request/courses/completed">completed</a>
+                <a href="/blogs/authorize/authorized">authorized</a>
+                <a href="/request/courses/unauthorized">un authorized</a>
                 <a href="/request/courses/canceled">canceled</a>
             </div>
         </nav>
 
         <div class="container">
-        <h1 class="text-center">Courses Request:{{order}}</h1>
+        <h1 class="text-center">Blogs Request:{{state}}</h1>
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">username</th>
-                        <th scope="col">Email</th>
+                        <th scope="col">tag</th>
                         <th scope="col">Handle</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                {% for data in allData %}
+                {% for data in blogs %}
                     <tr>
                         <th scope="row">{{data._KEY_}}</th>
-                        <td>{{data.urserId}}</td>
-                        <td>{{data.email}}</td>
-                        <td><a href="/request/course/view/{{data._UID_}}" type="button" class="btn btn-sm btn-outline-success">View</a></td>
+                        <td>{{data.userName}}</td>
+                        <td>{{data.tag}}</td>
+                        <td><a href="/blog/authorize/{{data._UID_}}" type="button" class="btn btn-sm btn-outline-success">View</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

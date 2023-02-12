@@ -1,3 +1,9 @@
+document.getElementById('searchB').onkeyup = function(e){
+    if (e.key === "Enter"){
+        let s = e.target.value.toLowerCase();
+        location.pathname='/blogs/search/'+s+'/1'
+    }
+}
 function dangerAlert(massage,time=4000) {
     if(massage.length>0){const danger = document.createElement('div');
     danger.classList.add('alert-danger');
@@ -102,3 +108,13 @@ jumpers.forEach(jumper => {
             jumper = null;
         }
 })}
+
+
+
+
+document.getElementById('searchC').onkeyup = function(e){
+    if (e.key === "Enter"){
+        let s = e.target.value.toLowerCase();
+        location.pathname='/courses/search/'+s.toLowerCase()
+    }
+}

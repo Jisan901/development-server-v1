@@ -15,7 +15,7 @@
                     <a href="/course/apply/{{data._UID_}}" class="button flex-center">Apply online</a>
                 </div>
             </div>
-            <img src="./logo1.jpg" alt="banner" />
+            <img src="{{data.banner}}" alt="banner" />
         </div>
         <div class="course-info">
 
@@ -25,80 +25,51 @@
             </div>
             <h2><span class="color-secondary">Course </span>content</h2>
             <div class="custom-ul">
-                <span class="custom-li">some thing interesting</span>
-                <span class="custom-li">some thing interesting</span>
-                <span class="custom-li">some thing interesting</span>
+                {% for i in data.courseContent %}
+                <span class="custom-li">{{i}}</span>
+                {% endfor %}
             </div>
         </div>
         <div class="software">
             <h2><span class="color-secondary">software</span> you learn</h2>
             <div class="softwares">
-                <img src="pe.png" alt="software"/>
-                <img src="pe.png" alt="software"/>
-                <img src="pe.png" alt="software"/>
-                <img src="pe.png" alt="software"/>
+                {% for i in data.softwares %}
+                <img src="{{i}}" alt="software"/>
+                {% endfor %}
             </div>
         </div>
         <div class="course-info">
             <h2><span class="color-secondary">Job </span>field</h2>
             <div class="custom-ul">
-                <span class="custom-li">some thing interesting</span>
-                <span class="custom-li">some thing interesting</span>
-                <span class="custom-li">some thing interesting</span>
+                {% for i in data.jobfields %}
+                <span class="custom-li">{{i}}</span>
+                {% endfor %}
             </div>
         </div>
     </section>
     
     <section class="courses">
         <div class="heading heading-2">
-            <h1><span class="color-success">Top</span> Courses</h1>
+            <h1><span class="color-success">New</span> Courses</h1>
         </div>
         <div class="cards">
+            {% for cou in someNew %}
             <div class="card">
-                <img src="./logo1.jpg" alt="image" />
+                <img src="{{ cou.banner }}" alt="image" />
                 <div class="body">
-                    <span class="tag" style="animation-duration:20s;" >course</span>
+                    <span class="tag" style="animation-duration:20s;" >{{cou.tag}}</span>
                     <div class="text-content">
-                        <h4>Courses name</h4>
-                        <div class="stars rating-star" -data-rating="2"></div>
-                        <span>Fee: $500</span>
+                        <h4>{{cou.title}}</h4>
+                        <span>fee: ${{cou.fee}}</span>
+                        <span><small><a class="color-info" href="/course/{{cou._UID_}}" style="text-decoration:underline;">Apply</a></small></span>
                         <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/14/2023</span>
+                            <img src="{{ cou.useravater }}" height="30" width="30" alt="icon" />
+                            <span class="date">{{cou.author}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag" style="animation-duration:19s;" >course</span>
-                    <div class="text-content">
-                        <h4>Courses name</h4>
-                        <div class="stars rating-star" -data-rating="2"></div>
-                        <span>Fee: $500</span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/14/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag" style="animation-duration:24s;" >course</span>
-                    <div class="text-content">
-                        <h4>Courses name</h4>
-                        <div class="stars rating-star" -data-rating="2"></div>
-                        <span>Fee: $500</span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/14/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </section>
     <div class="search">
@@ -107,6 +78,6 @@
     </div>
     <div class="subscription w-80">
             <h2>You can be your own<br />guiding star with our help</h2>
-            <a href="#">Join us</a>
+            <a href="/courses">Join us</a>
         </div>
 {% endblock body %}

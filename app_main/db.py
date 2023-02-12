@@ -49,7 +49,7 @@ class Mongo():
             item['__DATE__'] = datetime.datetime.utcnow().strftime("%d-%B-%Y, %H:%M:%S")
             item['_UID_']=genRandKey(10,target)
             idn = target.insert_one(parse_json(item)).inserted_id
-            return {'common':item['_KEY_'],'bson':ObjectId(idn)}
+            return {'common':item['_KEY_'],'bson':ObjectId(idn),'uid':item['_UID_']}
         elif type(item)==type(list()):
             ids = []
             idsb = []

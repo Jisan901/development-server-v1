@@ -9,12 +9,11 @@
         <h1 class="color-primary">Dashboard</h1>
         <div>
             <div class="user-banner">
-                <img src="{{ url_for('static',filename='./logo1.jpg')}}" height="100" width="100" alt="avatar" />
-                <h3>user name full</h3>
+                <img src="{{ url_for('static',filename='./pilot.png')}}" height="100" width="100" alt="avatar" />
+                <h3>{{user.name}}</h3>
             <div class="info">
-                <p>User Name: </p>
-                <p>Email: </p>
-                <p>Phone: </p>
+                <p>User Name: {{user.username}}</p>
+                <p>Email: {{ user.email }}</p>
             </div>
             </div>
             <div class="apply-courses team-blog">
@@ -22,15 +21,15 @@
                 <div class="cards">
                     {% for course in course_req %}
                     <div class="card">
-                    <img src="{{ url_for('static',filename='./logo1.jpg')}}" alt="image" />
+                    <img src="{{ course.course.banner }}" alt="image" />
                     <div class="body">
                         <span class="tag" style="animation-duration:20s;" >{{course.request.state}}</span>
                         <div class="text-content">
                             <h4>{{course.course.title}}</h4>
                             <span>Fee: ${{course.course.fee}}</span>
-                            <span><small>watch video from <a href="#">hear</a></small></span>
+                            <span><small>watch video from <a href="/class/watch/{{course.course._UID_}}/1">hear</a></small></span>
                             <div class="tag-by">
-                                <img src="./logo2.jpg" height="30" width="30" alt="icon" />
+                                <img src="{{course.course.useravater}}" height="30" width="30" alt="icon" />
                                 <span class="date">{{course.course.author}}</span>
                             </div>
                         </div>
@@ -39,13 +38,12 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="rest-pass">
-                <input class="input" type="text" name="password" id="password" placeholder="old password" />
-                <input class="input" type="text" name="newPassword" id="newPassword" placeholder="new password" />
-                <button class="danger">change password</button>
-            </div>
-        <button class="danger">Delete my account</button>
-        </div>
+<!--             <div class="rest-pass">
+    <input class="input" type="text" name="password" id="password" placeholder="old password" />
+    <input class="input" type="text" name="newPassword" id="newPassword" placeholder="new password" />
+    <button class="danger">change password</button>
+</div>
+ -->        </div>
     </section>
     <a id="web_jumpers"></a>
 

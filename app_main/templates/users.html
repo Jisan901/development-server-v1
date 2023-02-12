@@ -18,50 +18,21 @@
         </div>
         <br />
         <div class="cards">
+            {% for user in users %}
             <div class="card">
-                <img src="./logo1.jpg" alt="image" />
+                <img src="{{ url_for('static',filename='pilot.png') }}" alt="image" />
                 <div class="body">
                     <div class="text-content">
-                        <h4>user name</h4>
-                        <span>Email: $500</span>
-                        <span><small>phone: Elon musk</small></span>
-                        <span><small>devices: </small></span>
-                        <span><small>Account-date:</small></span>
-                        <span><small>applied courses: </small></span>
+                        <h4>{{user.username}}</h4>
+                        <span>Email: {{user.email}}</span>
+                        <span><small>devices: {{user.devices|length}}</small></span>
+                        <span><small>Account-date:{{user.__DATE__}}</small></span>
+                        <span><small>spend :{{user.spend_for_courses}} </small></span>
                         <button class="danger">Delete</button>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag">course</span>
-                    <div class="text-content">
-                        <h4>Courses name</h4>
-                        <span>Fee: $500</span>
-                        <span><small>By: Elon musk</small></span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">SpaceX</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag">course</span>
-                    <div class="text-content">
-                        <h4>Courses name</h4>
-                        <span>Fee: $500</span>
-                        <span><small>By: Elon musk</small></span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">SpaceX</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </section>
 

@@ -1,4 +1,4 @@
-from app_main import app, courses, db,course_req, users
+from app_main import app, courses, db,course_req, users, web_data
 from flask import render_template, session, request, redirect
 from app_main.db import parse_json
 from app_main.routes import updateDailyInfo
@@ -133,18 +133,21 @@ def handleReq(opt,key):
 
             allData=parse_json(course_req.find_one({"_UID_":key}))
             course = parse_json(courses.find_one({'_UID_':allData['courseId']}))
+            print('out complete')
             if opt=='complete' and course_req.find_one({'_UID_':key,'state':'complete'})==None:
+                print('in complete')
                 user = parse_json(users.find_one({"username":allData['urserId']}))
                 
                 db.update({'_UID_':key,'state':'pending'},{'$set':{'state':'completed'}},course_req)
+                db.update({'_UID_':key,'state':'canceled'},{'$set':{'state':'completed'}},course_req)
                 db.update({'username':allData['urserId']},{
                     '$set':{
                         'paid_courses':user['paid_courses']+[allData['courseId']],
-                        'spend_for_courses':user['spend_for_courses']+course['fee']
+                        'spend_for_courses':user['spend_for_courses']+int(course['fee'])
                     }
-                })
+                },users)
                 if info!=None:
-                    db.update({"date":info['date']},{'$set':{"sellout_amount":info["sellout_amount"]+course['fee'],"sell_courses":info['sell_courses']+[key]}},web_data)
+                    db.update({"date":info['date']},{'$set':{"sellout_amount":info["sellout_amount"]+int(course['fee']),"sell_courses":info['sell_courses']+[key]}},web_data)
 
                 return redirect('/request/course/view/'+str(key))
             elif opt == 'cancel':
@@ -166,3 +169,12 @@ def handleReq(opt,key):
         return redirect('/login')
     return 'invalid url'
     
+    
+    
+    
+@app.route('/users')
+def userAll ():
+    if 'admin' in session:
+        usera = parse_json(users.find())
+        return render_template('users.html',users=usera)
+    return '404'

@@ -68,11 +68,11 @@
     class="video-js vjs-16-9 my-video"
     controls
     preload="auto"
-    poster="banner.jpg"
-    data-setup="{}"
+    poster="{{video.bannerLink}}"
+    oncontextmenu="return false;"
+    data-setup={}
   >
-    <source id="main-source" src="http://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4" />
-    <source src="MY_VIDEO.webm" type="video/webm" />
+    <source id="main-source" src="{{video.link}}" type="video/mp4" />
     <p class="vjs-no-js">
       To view this video please enable JavaScript, and consider upgrading to a
       web browser that
@@ -81,19 +81,14 @@
       >
     </p>
   </video>
-  <h3 id="playing-video-title">#1:(some data) Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, votam autem alias a </h3>
+  <h3 id="playing-video-title">{{video.title}} </h3>
         </div>
         <div class="video-list">
             {% for video in videos %}
-            <div class="single-video" data-vid="{
-                thumbnail:{{video.bannerLink}},
-                duration:{{video.duration}},
-                link:{{video.link}},
-                title:{{video.title}}
-            }">
+            <div class="single-video">
                 <img src="{{video.bannerLink}}" height="86" width="140" alt="thumbnail" class="thumbnail">
                 <div class="text-ct">
-                    <h3>{{ video.title }}</h3>
+                    <h3><a href="/class/watch/{{key}}/{{ loop.index }}" style="color:#000;">{{ video.title }}</a></h3>
                     <small>duration: {{video.duration}}</small>
                 </div>
             </div>
@@ -101,16 +96,8 @@
         </div>
     </section>
     
-      <script src="https://vjs.zencdn.net/7.21.1/video.min.js">
-      
-      document.querySelectorAll('.single-video').forEach((e)=>{
-          e.onclick=(t)=>{
-              let video = JSON.parse(t.target.getAttribute('data-vid'))
-              document.getElementById("my-video").setAttribute('poster',video.thumbnail)
-              document.getElementById("main-source").setAttribute('src',video.link)
-              document.getElementById("playing-video-title").innerText=video.title
-          }
-      })
+      <script src="https://vjs.zencdn.net/7.21.1/video.min.js"></script>
+      <script >
   </script>
 
 {% endblock body %}

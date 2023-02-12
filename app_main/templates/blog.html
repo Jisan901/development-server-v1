@@ -4,7 +4,7 @@
     <style type="text/css" >
         .top-banner{
             position: relative;
-            background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('./go.jpg')!important;
+            background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url("{{data.banner}}")!important;
         }
         .blog-top{
             width: 100%;
@@ -95,6 +95,15 @@
             border: none;
             margin-top: 5px;
         }
+        .blog-body > *{
+            width: 100%;
+        }
+        .blog-body img{
+            width: 100%;
+        }
+        .blog-body video{
+            width: 100%;
+        }
     </style>
     <header class="header">
         {% include 'topNav.html' %}
@@ -105,43 +114,43 @@
         </div>
         <div class="user-info">
             <div class="imgs">
-                <img src="./logo1.jpg" alt="logo" />
-                <span>elon musk</span>
+                <img src="{{data.useravater}}" alt="logo" />
+                <span>{{data.userName}}</span>
             </div>
-            <span>1/2/3456</span>
+            <span>{{data.date}}</span>
         </div>
         </div>
     </header>
     <section class="blog-body">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur error esse quaerat officiis! Magnam, ab, suscipit necessitatibus rerum ducimus facilis exercitationem et soluta voluptatum, beatae saepe, accusantium itaque quasi quos porro nesciunt? Ratione error aspernatur, voluptates saepe fugiat maiores quam sequi iure dolores, facilis esse similique dolorem laboriosam minus consequatur magnam modi cum incidunt reiciendis quae, assumenda, corporis ducimus. Autem architecto, in laudantium numquam aperiam adipisci tenetur, recusandae excepturi temporibus ducimus labore officia voluptatibus, sapiente quisquam nulla animi est totam maiores sequi a praesentium. Fugiat libero, sunt! Placeat earum ipsa necessitatibus commodi reiciendis natus ullam exercitationem in eum, fugiat vero quaerat enim nostrum ipsum modi optio ex assumenda! Tempora ipsum dicta nemo, fuga, iste voluptate, nobis vitae maxime adipisci impedit, labore quisquam quaerat temporibus animi. Reiciendis aspernatur fugit laborum alias nostrum, exercitationem, dolores, sunt laboriosam sit illo veritatis nam iusto quidem ex architecto. Unde quisquam ratione vero inventore atque animi consequuntur soluta voluptatem, ipsam quos. Atque a, veritatis facilis laboriosam, accusamus voluptate iste modi deserunt eos mollitia blanditiis odit quod saepe. Facilis quod alias officiis at facere quisquam, fuga atque rem adipisci, laudantium vero quasi natus voluptas debitis consequatur omnis earum aperiam in rerum unde fugiat, quidem sint. Quas, dicta.</p>
+        {{data.blog|safe}}
     </section>
-    <section class="comments">
-        <h2>comments</h2>
-        <div class="comment">
-            <div class="top">
-                <img src="./logo2.jpg" height="50" width="50" alt="icon" />
-                <span>modid</span>
-                <span>1/3/2020</span>
-            </div>
-            <hr />
-            <div class="body">
-                hi how are you
-            </div>
+<!--     <section class="comments">
+    <h2>comments</h2>
+    <div class="comment">
+        <div class="top">
+            <img src="./logo2.jpg" height="50" width="50" alt="icon" />
+            <span>modid</span>
+            <span>1/3/2020</span>
         </div>
-    </section>
-    <br />
+        <hr />
+        <div class="body">
+            hi how are you
+        </div>
+    </div>
+</section>
+ -->    <br />
     <hr />
-    <form class="add-comment">
-    <h3>write a comment</h3>
-        <input class="input" type="text" name="comment" id="comment" placeholder="write your review" />
-        <button type="submit">send</button>
-    </form>
-    <section class="course-heading">
+<!--     <form class="add-comment">
+<h3>write a comment</h3>
+    <input class="input" type="text" name="comment" id="comment" placeholder="write your review" />
+    <button type="submit">send</button>
+</form>
+ -->    <section class="course-heading">
 
         <br />
         <div class="subscription">
             <h2>You can be your own<br />guiding star with our help</h2>
-            <a href="#">Join us</a>
+            <a href="/courses">Join us</a>
         </div>
     <br />
     </section>

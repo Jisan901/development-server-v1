@@ -23,7 +23,7 @@ def dashboard():
                 for re in course_re:
                     courseAll.append({"course":parse_json(courses.find_one({'_UID_':re['courseId']})),"request":re})
                 
-                return render_template('userDashbord.html',title='dashboard',course_req=courseAll)
+                return render_template('userDashbord.html',title='dashboard',course_req=courseAll,user=session['user'])
             session.pop('user')
             return render_template('error.html',errorMassage='account freezed')
     return redirect('/login')
@@ -52,7 +52,7 @@ def create_user():
             "spend_for_courses":0,
             "request":[]
         }
-        if users.find_one(parse_json({"username":username,"email":email}))==None:
+        if users.find_one(parse_json({"username":username,"email":email}))==None and username != 'admin':
             db.add(user,users)
             
             info = updateDailyInfo()

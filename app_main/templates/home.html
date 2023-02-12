@@ -64,48 +64,24 @@
     <section class="courses">
         <h1>Find the right <span class="color-secondary">online</span><br />course for you.</h1>
         <div class="cards">
+            {% for cou in someNew %}
             <div class="card">
-                <img src="https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=300" alt="image" />
+                <img src="{{ cou.banner }}" alt="image" />
                 <div class="body">
-                    <span class="tag">seo</span>
+                    <span class="tag" style="animation-duration:20s;" >{{cou.tag}}</span>
                     <div class="text-content">
-                        <h4>seo beginner</h4>
-                        <span>Fee: $500</span>
+                        <h4>{{cou.title}}</h4>
+                        <span>fee: ${{cou.fee}}</span>
+                        <span><small><a class="color-info" href="/course/{{cou._UID_}}" style="text-decoration:underline;">Apply</a></small></span>
                         <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">Elon musk</span>
+                            <img src="{{ cou.useravater }}" height="30" width="30" alt="icon" />
+                            <span class="date">{{cou.author}}</span>
                         </div>
                     </div>
                 </div>
+                <br />
             </div>
-            <div class="card">
-                <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=300" alt="image" />
-                <div class="body">
-                    <span class="tag">web</span>
-                    <div class="text-content">
-                        <h4>Web development</h4>
-                        <span>Fee: $500</span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">Janker</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.pexels.com/photos/4960438/pexels-photo-4960438.jpeg?auto=compress&cs=tinysrgb&w=300" alt="image" />
-                <div class="body">
-                    <span class="tag">marketing</span>
-                    <div class="text-content">
-                        <h4>digital marketing</h4>
-                        <span>Fee: $500</span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">Siam</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <div class="subscription">
             <h2>You can be your own<br />guiding star with our help</h2>
@@ -114,56 +90,30 @@
     </section>
     <section class="team-blog">
         <div class="heading">
-            <h1>We share <br />our thought on december</h1>
+            <h1>We share <br />our thought on blog</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, aut.</p>
         </div>
         <br />
         <div class="cards">
+            {% for blog in someBlog %}
             <div class="card">
-                <img src="https://images.pexels.com/photos/4458/cup-mug-desk-office.jpg?auto=compress&cs=tinysrgb&w=300" alt="image" />
+                <img src="{{blog.banner}}" alt="image" />
                 <div class="body">
-                    <span class="tag">web</span>
+                    <span class="tag">{{blog.tag}}</span>
                     <div class="text-content">
-                        <h4>about some blog name</h4>
-                        <span></span>
-                        <span><small>By: Elon musk</small></span>
+                        <h4>{{blog.title}}</h4>
+                        <span><small>By: {{blog.userName}}</small></span>
+                        <span><small><a class="color-info" href="/blog/{{blog._UID_}}" style="text-decoration:underline;">view</a></small></span>
+
                         <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/12/2023</span>
+                            <img src="{{blog.useravater}}" height="30" width="30" alt="icon" />
+                            <span class="date">{{blog.date}}</span>
                         </div>
                     </div>
                 </div>
+                <br />
             </div>
-            <div class="card">
-                <img src="https://images.pexels.com/photos/4458/cup-mug-desk-office.jpg?auto=compress&cs=tinysrgb&w=300" alt="image" />
-                <div class="body">
-                    <span class="tag">web</span>
-                    <div class="text-content">
-                        <h4>about some blog name</h4>
-                        <span></span>
-                        <span><small>By: Elon musk</small></span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/12/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.pexels.com/photos/4458/cup-mug-desk-office.jpg?auto=compress&cs=tinysrgb&w=300" alt="image" />
-                <div class="body">
-                    <span class="tag">web</span>
-                    <div class="text-content">
-                        <h4>about some blog name</h4>
-                        <span></span>
-                        <span><small>By: Elon musk</small></span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/12/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </section>
     <a id="web_jumpers"></a>

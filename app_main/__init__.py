@@ -7,7 +7,7 @@ app = Flask(__name__)
 ###
 # production version control
 ###
-production = True
+production = False
 
 
 
@@ -33,9 +33,11 @@ web_data = db.column('web_data')
 admin_info = db.column('admin_info')
 courses = db.column('courses')
 course_req = db.column('course_req')
+blogs = db.column('blogs')
 
 from app_main import api
 from app_main import routes
 from app_main import admin
 from app_main import s_routes
 from app_main import authentication
+from app_main import blog

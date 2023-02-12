@@ -20,7 +20,7 @@
         <div class="cards">
             {% for course in courses %}
             <div class="card">
-                <img src="./logo1.jpg" alt="image" />
+                <img src="{{course.banner}}" alt="image" />
                 <div class="body">
                     <span class="tag">{{course.tag}}</span>
                     <div class="text-content">
@@ -28,7 +28,7 @@
                         <span>Fee: {{course.fee}}</span>
 <!--                         <span><small>By: {{course.author}}</small></span>
  -->                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
+                            <img src="{{course.useravater}}" height="30" width="30" alt="icon" />
                             <span class="date">{{course.author}}</span>
                         </div>
                         <button class="danger"><a href="/courses/manage/delete/{{course._UID_}}">Delete</a></button>

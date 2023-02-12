@@ -3,7 +3,7 @@
 {% block body %}
     <style type="text/css" >
         .blogs{
-            width: 80%;
+            width: 95%;
             margin: 20px auto;
         }
         .panne{
@@ -13,7 +13,7 @@
             align-items: center;
             
         }        
-        .panne span{
+        .panne a{
             padding: 10px 20px;
             margin: 0 4px;
             font-weight: bold;
@@ -21,7 +21,7 @@
             border-radius: 5px;
             
         }
-        .panne button{
+        .panne a{
             background-color: #9d00ff;
             color: #fff;
             border-color: #9d00ff;
@@ -33,145 +33,44 @@
         {% include 'topNav.html' %}
         {% include 'nav.html' %}
     </header>
-    <section class="blogs">
-    <h2 class="color-primary">Blogs</h2>
-    <div class="search">
+    <h2 class="color-primary heading">Blogs</h2>
+        <div class="search">
             <ion-icon name="search-outline"></ion-icon>
-            <input type="search" name="search" id="search" placeholder="what you want to find?"/>
+            <input type="search" name="searchB" id="searchB" placeholder="what you want to find?"/>
     </div>
+
+    <section class="blogs">
     <div class="team-blog">
         <div class="cards">
+            {% for blog in blogs %}
             <div class="card">
-                <img src="./logo1.jpg" alt="image" />
+                <img src="{{blog.banner}}" alt="image" />
                 <div class="body">
-                    <span class="tag">blog tag</span>
+                    <span class="tag">{{blog.tag}}</span>
                     <div class="text-content">
-                        <h4>Tweeter is not my because i am not ownner of it</h4>
-                        <span><small>By: Elon musk</small></span>
+                        <h4>{{blog.title}}</h4>
+                        <span><small>By: {{blog.userName}}</small></span>
+                        <span><small><a class="color-info" href="/blog/{{blog._UID_}}" style="text-decoration:underline;">view</a></small></span>
+
                         <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/5/2023</span>
+                            <img src="{{blog.useravater}}" height="30" width="30" alt="icon" />
+                            <span class="date">{{blog.date}}</span>
                         </div>
                     </div>
                 </div>
+                <br>
+                <br>
             </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag">blog tag</span>
-                    <div class="text-content">
-                        <h4>Tweeter is not my because i am not ownner of it</h4>
-                        <span><small>By: Elon musk</small></span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/5/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag">blog tag</span>
-                    <div class="text-content">
-                        <h4>Tweeter is not my because i am not ownner of it</h4>
-                        <span><small>By: Elon musk</small></span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/5/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag">blog tag</span>
-                    <div class="text-content">
-                        <h4>Tweeter is not my because i am not ownner of it</h4>
-                        <span><small>By: Elon musk</small></span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/5/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag">blog tag</span>
-                    <div class="text-content">
-                        <h4>Tweeter is not my because i am not ownner of it</h4>
-                        <span><small>By: Elon musk</small></span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/5/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag">blog tag</span>
-                    <div class="text-content">
-                        <h4>Tweeter is not my because i am not ownner of it</h4>
-                        <span><small>By: Elon musk</small></span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/5/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag">blog tag</span>
-                    <div class="text-content">
-                        <h4>Tweeter is not my because i am not ownner of it</h4>
-                        <span><small>By: Elon musk</small></span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/5/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag">blog tag</span>
-                    <div class="text-content">
-                        <h4>Tweeter is not my because i am not ownner of it</h4>
-                        <span><small>By: Elon musk</small></span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/5/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="./logo1.jpg" alt="image" />
-                <div class="body">
-                    <span class="tag">blog tag</span>
-                    <div class="text-content">
-                        <h4>Tweeter is not my because i am not ownner of it</h4>
-                        <span><small>By: Elon musk</small></span>
-                        <div class="tag-by">
-                            <img src="./logo2.jpg" height="30" width="30" alt="icon" />
-                            <span class="date">1/5/2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
     <div class="panne">
-        <button>previous</button>
-        <button>next</button>
+        {% if page == 1 %}
+        
+        {% else %}
+        <a href="/blogs/page{{stext}}/{{page-1}}">previous</a>
+        {% endif %}
+        <a href="/blogs/page{{stext}}/{{page+1}}">next</a>
     </div>
     </section>
     
@@ -179,5 +78,5 @@
             <h2>You can be your own<br />guiding star with our help</h2>
             <a href="#">Join us</a>
         </div>
-    
+    <a id="web_jumpers"></a>
 {% endblock body %}

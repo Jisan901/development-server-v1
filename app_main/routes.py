@@ -1,4 +1,4 @@
-from app_main import app,db,users,web_data,params,courses,course_req
+from app_main import app,db,users,web_data,params,courses,course_req,blogs
 from flask import render_template, session, request, redirect
 from app_main.db import parse_json
 import datetime
@@ -31,9 +31,13 @@ def updateDailyInfo():
 @app.route('/')
 def index():
     info = updateDailyInfo()
+    someNew = parse_json(courses.find())
+    someNew=someNew[-3:len(someNew)]
+    someBlog = parse_json(blogs.find({'isAuthorized':'authorized'}))
+    someBlog=someBlog[-3:len(someBlog)]
     if info!=None:
         db.update({"date":info['date']},{'$set':{"visited":info["visited"]+1}},web_data)
-    return render_template('home.html', title = 'Home')
+    return render_template('home.html', title = 'Home',someNew=someNew,someBlog=someBlog)
 
     
 # ------------------------------- #
@@ -51,9 +55,11 @@ def Courses():
     
 @app.route('/course/<string:key>')
 def course(key):
+    someNew = parse_json(courses.find())
+    someNew=someNew[-3:len(someNew)]
     cdt=parse_json(courses.find_one({'_UID_':key}))
     if cdt!= None:
-        return render_template('course.html',data=cdt,title=cdt['title'])
+        return render_template('course.html',data=cdt,title=cdt['title'],someNew=someNew)
     return '<h1>404 course not found</h1>'
     
     
@@ -83,7 +89,7 @@ def courseReq(key):
                 )
                 if course_req.find_one({"urserId":user['username'],"courseId":key})==None:
                     
-                    key=db.add(data,course_req)['common']
+                    key=db.add(data,course_req)['uid']
                     old_req=parse_json(users.find_one({
                         "email":user['email'],
                         "password":user['password']
@@ -110,23 +116,58 @@ def courseReq(key):
 #              watch              #
 # ------------------------------- #
     
-@app.route('/class/watch/<string:key>')
-def courseWatch(key):
+@app.route('/class/watch/<string:key>/<int:index>')
+def courseWatch(key,index):
     if 'user' in session:
         user = parse_json(users.find_one({'username':session['user']['username']}))
-        if user['paid_courses'].count(key)>0:
+        
+        if user['paid_courses'].count(key)>0 and course_req.find_one({'courseId':key,'urserId':user['username'],'state':'completed'})!=None:
             course = parse_json(courses.find_one({'_UID_':key}))
             videos = course['videos']
             
-            return render_template('courseVideos.html',title = 'videos',videos = videos)
+            return render_template('courseVideos.html',title = 'videos',videos = videos,key=key,video=videos[index-1])
+        return redirect('/dashboard')
     if 'admin' in session:
         course = parse_json(courses.find_one({'_UID_':key}))
         videos = course['videos']
             
-        return render_template('courseVideos.html',title = 'videos',videos = videos)
+        return render_template('courseVideos.html',title = 'videos',videos = videos,key=key,video=videos[index-1])
     
     
     return redirect('/login')
+    
+    
+    
+    
+# ------------------------------- #
+#             search              #
+# ------------------------------- #
+
+@app.route('/courses/search/<string:stext>')
+def csearch(stext):
+    
+    allCourses = parse_json(
+            courses.find({'tags':{"$regex":stext}})
+            )
+        
+    
+    return render_template('courses.html',allCourses=allCourses,title='Courses')
+    
+@app.route('/blogs/search/<string:stext>/<int:page>')
+def bsearch(stext,page):
+    authorized = parse_json(blogs.find({'isAuthorized':'authorized','tags':{"$regex":stext}}))
+    total = len(authorized)
+    perPage = -9
+    end = perPage*page
+    start = end+9
+    if page == 1:
+        start = total
+    
+    
+    mapped = authorized[end:start]
+    
+    return render_template('blogs.html',title='Blogs',blogs=mapped,page=page,stext='/'+stext)
+    
     
     
     
