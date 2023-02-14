@@ -37,7 +37,7 @@ def index():
     someBlog=someBlog[-3:len(someBlog)]
     if info!=None:
         db.update({"date":info['date']},{'$set':{"visited":info["visited"]+1}},web_data)
-    return render_template('home.html', title = 'Home',someNew=someNew,someBlog=someBlog)
+    return render_template('home.html', title = 'Send volt academy',someNew=someNew,someBlog=someBlog)
 
     
 # ------------------------------- #
