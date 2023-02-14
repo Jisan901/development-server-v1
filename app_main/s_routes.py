@@ -28,10 +28,10 @@ def contact():
 
 
 # seo 
- @app.route('/sitemap.xml')
+@app.route('/sitemap.xml')
  
- def sitemap ():
+def sitemap ():
      
-     res = make_response(render_template('sitemap.xml'))
-     res.headers["Content-Type"] = "application/xml"
-     return res
+    res = make_response(render_template('sitemap.xml'))
+    res.headers["Content-Type"] = "application/xml"
+    return res
