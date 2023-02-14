@@ -1,5 +1,5 @@
 from app_main import app
-from flask import render_template
+from flask import render_template,make_response
 
 
 
@@ -24,3 +24,14 @@ def contact():
 # ------------------------------- #
 #             routes              #
 # ------------------------------- #
+
+
+
+# seo 
+ @app.route('/sitemap.xml')
+ 
+ def sitemap ():
+     
+     res = make_response(render_template('sitemap.xml'))
+     res.headers["Content-Type"] = "application/xml"
+     return res
