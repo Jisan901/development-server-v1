@@ -1,17 +1,1 @@
-{
-    "params":{
-        "admin":{
-            "name":"Jisan",
-            "email":"jisuna901@gmail.com",
-            "password":"02943732e550e37d95a29ca48a6cf5b91fa20de208724965650c4e47a1dd2685f29bf45f80",
-            "token":"deecf95b71296d99b55a"
-        },
-        "databases":{
-            "local":"mongodb://localhost:27017/",
-            "cloud":"mongodb+srv://Jisan2:nByvJIVGfNRgfJd2@cluster0.ahnhiyc.mongodb.net/?retryWrites=true&w=majority",
-            "db_token":"Bc097c3466c1f8f843f0"
-        },
-        "secrets":"88339a8ec5f922033ec5337389d5fc79ffb8c593407e2b8127",
-        "token":"7dfb740518e2f1600cc6953f60015368586f0aa2"
-    }
-}
+
